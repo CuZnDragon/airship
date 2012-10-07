@@ -26,8 +26,8 @@ public class RenderSteamBoat extends Render
 				GL11.glPushMatrix();
 				GL11.glTranslatef((float) d, (float) d1, (float) d2);
 				GL11.glRotatef(180F - f, 0.0F, 1.0F, 0.0F);
-				float f2 = (float) entityboat.field_806_b - f1;
-				float f3 = (float) entityboat.field_807_a - f1;
+				float f2 = (float) entityboat.getTimeSinceHit() - f1;
+				float f3 = (float) entityboat.getDamageTaken() - f1;
 				if (f3 < 0.0F)
 					{
 						f3 = 0.0F;
@@ -35,7 +35,7 @@ public class RenderSteamBoat extends Render
 				if (f2 > 0.0F)
 					{
 						GL11.glRotatef(((MathHelper.sin(f2) * f2 * f3) / 10F)
-						    * (float) entityboat.field_808_c, 1.0F, 0.0F, 0.0F);
+						    * (float) entityboat.getForwardDirection(), 1.0F, 0.0F, 0.0F);
 					}
 				loadTexture("/terrain.png");
 				float f4 = 0.75F;

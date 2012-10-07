@@ -95,7 +95,7 @@ public class EntityAirShip extends Entity implements IInventory
 				// AirShip.airShipRenderID = RenderingRegistry.instance()
 				// .getNextAvailableRenderId();
 
-				mc = FMLClientHandler.instance().getClient();
+//				mc = FMLClientHandler.instance().getClient();
 			}
 
 		/**
@@ -112,6 +112,7 @@ public class EntityAirShip extends Entity implements IInventory
 
 			}
 
+		@Override
 		protected void entityInit()
 			{
 				this.dataWatcher.addObject(17, new Integer(0)); // airShipTimeSinceHit
@@ -124,9 +125,9 @@ public class EntityAirShip extends Entity implements IInventory
 		 * blocks. This enables the entity to be pushable on contact, like boats or
 		 * minecarts.
 		 */
-		public AxisAlignedBB getCollisionBox(Entity par1Entity)
+		public AxisAlignedBB getCollisionBox(Entity entity)
 			{
-				return par1Entity.boundingBox;
+				return entity.boundingBox;
 			}
 
 		/**
@@ -159,10 +160,9 @@ public class EntityAirShip extends Entity implements IInventory
 				return (double) height * 0.0D - 0.30000001192092896D;
 			}
 
-		public boolean attackEntityFrom(DamageSource par1DamageSource, int i)
+		public boolean attackEntityFrom(DamageSource damageSource, int i)
 			{
-
-				if (par1DamageSource.getSourceOfDamage() == null)
+				if (damageSource.getSourceOfDamage() == null)
 					{
 						return true;
 					}
@@ -172,26 +172,26 @@ public class EntityAirShip extends Entity implements IInventory
 						return true;
 					}
 
-				double d1 = par1DamageSource.getSourceOfDamage().posX - this.posX;
-				double d2 = par1DamageSource.getSourceOfDamage().posY - this.posY;
-				double d3 = par1DamageSource.getSourceOfDamage().posZ - this.posZ;
-				double d4 = par1DamageSource.getSourceOfDamage().posX - d1 / 2;
-				double d5 = par1DamageSource.getSourceOfDamage().posY - d2 / 2;
-				double d6 = par1DamageSource.getSourceOfDamage().posZ - d3 / 2;
+//				double d1 = damageSource.getSourceOfDamage().posX - this.posX;
+//				double d2 = damageSource.getSourceOfDamage().posY - this.posY;
+//				double d3 = damageSource.getSourceOfDamage().posZ - this.posZ;
+//				double d4 = damageSource.getSourceOfDamage().posX - d1 / 2;
+//				double d5 = damageSource.getSourceOfDamage().posY - d2 / 2;
+//				double d6 = damageSource.getSourceOfDamage().posZ - d3 / 2;
 
-				// mc.effectRenderer.addEffect(new EntitySteamExplode(worldObj, d4, d5,
-				// d6, 0.0D, 0.0D, 0.0D));
+//				mc.effectRenderer.addEffect(new EntitySteamExplode(worldObj, d4, d5,
+//				d6, 0.0D, 0.0D, 0.0D));
 
-				// this.airShipRockDirection = -this.airShipRockDirection;
+//				this.airShipRockDirection = -this.airShipRockDirection;
 				this.setForwardDirection(-this.getForwardDirection());
-				// this.airShipTimeSinceHit = 1;
-				this.setTimeSinceHit(10);
-				// this.airShipCurrentDamage += i * 10;
+//				this.airShipTimeSinceHit = 1;
+				this.setTimeSinceHit(1);
+//				this.airShipCurrentDamage += i * 10;
 				this.setDamageTaken(this.getDamageTaken() + i * 10);
 				this.setBeenAttacked();
 
-				if (par1DamageSource.getEntity() instanceof EntityPlayer
-				    && ((EntityPlayer) par1DamageSource.getEntity()).capabilities.isCreativeMode)
+				if (damageSource.getEntity() instanceof EntityPlayer
+				    && ((EntityPlayer) damageSource.getEntity()).capabilities.isCreativeMode)
 					{
 						this.setDamageTaken(600);
 					}
@@ -344,8 +344,7 @@ public class EntityAirShip extends Entity implements IInventory
 						double d9 = (this.boundingBox.minY + ((this.boundingBox.maxY - this.boundingBox.minY) * (double) (j + 1))
 						    / (double) i) - 0.125D;
 
-						AxisAlignedBB axisalignedbb = AxisAlignedBB.getAABBPool()
-						    .addOrModifyAABBInPool(this.boundingBox.minX, d5,
+						AxisAlignedBB axisalignedbb = AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(this.boundingBox.minX, d5,
 						        this.boundingBox.minZ, this.boundingBox.maxX, d9,
 						        this.boundingBox.maxZ);
 
@@ -452,7 +451,7 @@ public class EntityAirShip extends Entity implements IInventory
 								// airShipPosRotationIncrements--;
 								--this.airShipPosRotationIncrements;
 								this.setPosition(d13, d15, d9);
-								this.setRotation(rotationYaw, rotationPitch);
+								this.setRotation(this.rotationYaw, this.rotationPitch);
 							}
 						else
 							{
@@ -544,26 +543,34 @@ public class EntityAirShip extends Entity implements IInventory
 						d13 = Math.sqrt(this.motionX * this.motionX + this.motionZ
 						    * this.motionZ);
 
-						if (d13 > 0.35D)
+//						if (d13 > 0.35D)
+						if (d13 > 0.25000000000000001D)
 							{
-								d15 = 0.35D / d13;
+//								d15 = 0.35D / d13;
+								d15 = 0.25000000000000001D / d13;
 								this.motionX *= d15;
 								this.motionZ *= d15;
-								d13 = 0.35D;
+//								d13 = 0.35D;
+								d13 = 0.25000000000000001D;
 							}
 
-						if (d13 > d11 && this.field_70276_b < 0.35D)
+//						if (d13 > d11 && this.field_70276_b < 0.35D)
+						if (d13 > d11 && this.field_70276_b < 0.25000000000000001D)
 							{
-								this.field_70276_b += (0.35D - this.field_70276_b) / 35.0D;
+//								this.field_70276_b += (0.35D - this.field_70276_b) / 35.0D;
+								this.field_70276_b += (0.25000000000000001D - this.field_70276_b) / 0.25000000000000001D;
 
-								if (this.field_70276_b > 0.35D)
+//								if (this.field_70276_b > 0.35D)
+								if (this.field_70276_b > 0.25000000000000001D)
 									{
-										this.field_70276_b = 0.35D;
+//										this.field_70276_b = 0.35D;
+										this.field_70276_b = 0.25000000000000001D;
 									}
 							}
 						else
 							{
-								this.field_70276_b -= (this.field_70276_b - 0.07D) / 35.0D;
+//								this.field_70276_b -= (this.field_70276_b - 0.07D) / 35.0D;
+								this.field_70276_b -= (this.field_70276_b - 0.07D) / 0.25000000000000001D;
 
 								if (this.field_70276_b < 0.07D)
 									{
@@ -597,8 +604,9 @@ public class EntityAirShip extends Entity implements IInventory
 
 						this.moveEntity(this.motionX, this.motionY, this.motionZ);
 
-//						this.worldObj.spawnParticle("steam", var15, this.posY - 0.125D, var17, this.motionX, this.motionY, this.motionZ);
-						// Look at how the splash stuff was done....
+// Need to see if there is a way to do the steam particles with a spawnparticle....
+//    this.worldObj.spawnParticle("steam", var15, this.posY - 0.125D, var17, this.motionX, this.motionY, this.motionZ);
+// look at how the splash stuff was done....
 						// if (AirShip.SHOW_BOILER)
 						// {
 						// double smoke = rand.nextFloat() * 2.0f - 1.0f;
@@ -803,12 +811,12 @@ public class EntityAirShip extends Entity implements IInventory
 
 		public boolean interact(EntityPlayer entityplayer)
 			{
-				if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer)
-				    && riddenByEntity != entityplayer)
+				if (this.riddenByEntity != null && (this.riddenByEntity instanceof EntityPlayer)
+				    && this.riddenByEntity != entityplayer)
 					{
 						return true;
 					}
-				if (!worldObj.isRemote)
+				if (!this.worldObj.isRemote)
 					{
 						ItemStack itemstack = entityplayer.inventory.getCurrentItem();
 						if (itemstack != null && itemstack.itemID == Item.bow.shiftedIndex)
@@ -869,9 +877,9 @@ public class EntityAirShip extends Entity implements IInventory
 			}
 
 		@SideOnly(Side.CLIENT)
-		public void func_70270_d(boolean par1)
+		public void func_70270_d(boolean p1)
 			{
-				this.field_70279_a = par1;
+				this.field_70279_a = p1;
 			}
 		
 		public void setDead()
