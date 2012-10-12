@@ -2,13 +2,17 @@ package net.wyrms.airship;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.lwjgl.input.Keyboard;
 
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.Block;
 import net.minecraft.src.DamageSource;
@@ -19,6 +23,9 @@ import net.minecraft.src.Material;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.World;
+import net.wyrms.airship.client.ModelSteamBoat;
+import net.wyrms.airship.client.RenderAirShip;
+import net.wyrms.airship.client.RenderSteamBoat;
 
 public class EntitySteamBoat extends Entity
 	{
@@ -544,13 +551,18 @@ public class EntitySteamBoat extends Entity
 
 						this.moveEntity(this.motionX, this.motionY, this.motionZ);
 
-						double smoke = this.rand.nextFloat() * 2.0f - 1.0f;
-						if (smoke > 0.65f)
+						Side side = FMLCommonHandler.instance().getEffectiveSide();
+						if (side == Side.CLIENT)
 							{
-								this.worldObj.spawnParticle("smoke", this.posX,
-								    this.posY + 0.9D, this.posZ, 0.0D, 0.0D, 0.0D);
+								// We are on the client side.
+								//Minecraft mc = FMLClientHandler.instance().getClient();
+								double smoke = this.rand.nextFloat() * 2.0f - 1.0f;
+								if (smoke > 0.65f)
+									{
+										this.worldObj.spawnParticle("smoke", this.posX, this.posY + 0.9D, this.posZ, 0.0D, 0.0D, 0.0D);
+									}
 							}
-
+						
 						// if (isCollidedHorizontally && d11 > 0.14999999999999999D)
 						if (this.isCollidedHorizontally && d11 > 0.2D)
 							{
@@ -776,4 +788,5 @@ public class EntitySteamBoat extends Entity
 			{
 				this.field_70279_a = p1;
 			}
+		
 	}

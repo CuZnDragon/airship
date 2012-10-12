@@ -4,6 +4,8 @@ import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 import net.minecraft.src.ModelBase;
 
+import net.wyrms.airship.client.CustomModelRenderer;
+
 @SideOnly(Side.CLIENT)
 public class ModelAirShip extends ModelBase
 
