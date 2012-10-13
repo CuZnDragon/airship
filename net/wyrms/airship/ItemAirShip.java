@@ -25,7 +25,7 @@ public class ItemAirShip extends Item
 			{
 				super(itemIndex);
 				this.maxStackSize = 1;
-				this.setTabToDisplayOn(CreativeTabs.tabTransport);
+				this.setCreativeTab(CreativeTabs.tabTransport);
 				this.setIconIndex(17);
 				this.setItemName("itemAirship");
 			}

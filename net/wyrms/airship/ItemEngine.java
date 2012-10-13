@@ -9,7 +9,7 @@ public class ItemEngine extends Item
 			{
 				super(itemIndex);
 				this.maxStackSize = 1;
-				this.setTabToDisplayOn(CreativeTabs.tabTransport);
+				this.setCreativeTab(CreativeTabs.tabTransport);
 				this.setIconIndex(16);
 				this.setItemName("itemEngine");
 			}

@@ -27,7 +27,7 @@ public class ItemSteamBoat extends Item
 			{
 				super(itemIndex);
 				maxStackSize = 1;
-				this.setTabToDisplayOn(CreativeTabs.tabTransport);
+				this.setCreativeTab(CreativeTabs.tabTransport);
 				this.setIconIndex(18);
 				this.setItemName("itemSteamboat");
 			}

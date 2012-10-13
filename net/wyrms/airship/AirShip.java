@@ -36,9 +36,9 @@ import net.wyrms.airship.ItemSteamBoat;
 import net.wyrms.airship.client.AirShipTickHandler;
 import net.wyrms.airship.client.RenderSteamBoat;
 
-@Mod(name = "Airship", modid = "Airship", version = "4.1.1")
+@Mod(name = "AirShip", modid = "AirShip", version = "1.7.4")
 @NetworkMod(channels =
-	{ "Airship" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class, versionBounds = "[4.1.1]")
+	{ "Airship" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class, versionBounds = "[1.7.4]")
 public class AirShip
 	{
 		public static boolean ENABLE_AIRSHIP;

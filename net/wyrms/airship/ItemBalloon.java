@@ -20,7 +20,7 @@ public class ItemBalloon extends Item
 			{
 				super(itemIndex);
 				this.maxStackSize = 1;
-				this.setTabToDisplayOn(CreativeTabs.tabTransport);
+				this.setCreativeTab(CreativeTabs.tabTransport);
 //				this.setHasSubtypes(true);
 				this.setMaxDamage(0);
 				this.setIconIndex(0);
